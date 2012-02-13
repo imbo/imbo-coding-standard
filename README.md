@@ -8,7 +8,7 @@ Installation
 The coding standard is installed using `pear`:
 
 ```
-sudo pear config-set audo_discover 1
+sudo pear config-set auto_discover 1
 sudo pear install --alldeps pear.starzinger.net/ImboStandard
 ```
 
