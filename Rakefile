@@ -82,7 +82,7 @@ task :publish, :version do |t, args|
     version = args[:version]
 
     if /^[\d]+\.[\d]+\.[\d]+$/ =~ version
-        file = "ImboStandard-#{version}".tgz
+        file = "ImboStandard-#{version}.tgz"
 
         system "scp #{file} pear.starzinger.net:~"
         system "ssh pear.starzinger.net 'pirum add /services/apache/pear.starzinger.net/html #{file}'"
