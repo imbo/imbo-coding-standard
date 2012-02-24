@@ -1,7 +1,7 @@
 Imbo Coding Standard
 ====================
 
-This is the coding standard used with [PHP_CodeSniffer](http://pear.php.net/package/PHP_CodeSniffer) by [Imbo](https://github.com/christeredvartsen/imbo) and [ImboClient](https://github.com/christeredvartsen/imboclient-php) (as well as most of my other OSS projects). Installable via [PEAR](http://pear.php.net), and referenced using `--standard=Imbo` when executing `phpcs`.
+This is the coding standard used with [PHP_CodeSniffer](http://pear.php.net/package/PHP_CodeSniffer) by [Imbo](https://github.com/imbo/imbo), [ImboClient](https://github.com/imbo/imboclient-php) and all other Imbo-related projects (as well as most of my other OSS projects). Installable via [PEAR](http://pear.php.net), and referenced using `--standard=Imbo` when executing `phpcs`.
 
 Installation
 ------------

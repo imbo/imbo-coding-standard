@@ -40,7 +40,7 @@ task :pear, :version do |t, args|
                     xml.api "stable"
                 }
                 xml.license "MIT", :uri => "http://www.opensource.org/licenses/mit-license.php"
-                xml.notes "http://github.com/christeredvartsen/imbo-codesniffer/blob/#{version}/README.markdown"
+                xml.notes "http://github.com/imbo/imbo-codesniffer/blob/#{version}/README.markdown"
                 xml.contents {
                     xml.dir(:name => "/", :baseinstalldir => "PHP/CodeSniffer/Standards") {
                         xml.file(:md5sum => hash.hexdigest(File.read("Imbo/ruleset.xml")), :role => "php", :name => "Imbo/ruleset.xml")
