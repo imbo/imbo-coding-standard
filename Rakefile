@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'date'
 require 'digest/md5'
 require 'fileutils'
@@ -43,7 +42,9 @@ task :pear, :version do |t, args|
                 xml.notes "http://github.com/imbo/imbo-codesniffer/blob/#{version}/README.markdown"
                 xml.contents {
                     xml.dir(:name => "/", :baseinstalldir => "PHP/CodeSniffer/Standards") {
-                        xml.file(:md5sum => hash.hexdigest(File.read("Imbo/ruleset.xml")), :role => "php", :name => "Imbo/ruleset.xml")
+                        `git ls-files *.php *.xml`.split("\n").each { |file|
+                            xml.file(:md5sum => hash.hexdigest(File.read(file)), :role => "php", :name => file)
+                        }
                     }
                 }
                 xml.dependencies {
