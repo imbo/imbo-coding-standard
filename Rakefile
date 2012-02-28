@@ -84,9 +84,12 @@ task :publish, :version do |t, args|
     if /^[\d]+\.[\d]+\.[\d]+$/ =~ version
         file = "ImboStandard-#{version}.tgz"
 
-        system "scp #{file} pear.starzinger.net:~"
-        system "ssh pear.starzinger.net 'pirum add /services/apache/pear.starzinger.net/html #{file}'"
-
+        system "pirum add /home/christer/dev/christeredvartsen.github.com #{file}"
+        Dir.chdir("/home/christer/dev/christeredvartsen.github.com")
+        system "git add --all"
+        system "git commit -a -m 'Added #{file[0..-5]}'"
+        system "git push"
+        Dir.chdir("/home/christer/dev/imbo-codesniffer")
         File.unlink(file)
     end
 end
@@ -98,6 +101,7 @@ task :github, :version do |t, args|
     if /^[\d]+\.[\d]+\.[\d]+$/ =~ version
         system "git checkout master"
         system "git tag #{version}"
+        system "git push"
         system "git push --tags"
     end
 end
