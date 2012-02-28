@@ -23,4 +23,6 @@
   <rule ref="PEAR.Commenting.InlineComment" />
   <rule ref="Generic.Files.LineEndings" />
   <rule ref="Zend.Files.ClosingTag" />
+
+  <rule ref="Imbo.Formatting.DisallowMultipleUseStatements" />
 </ruleset>
