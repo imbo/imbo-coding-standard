@@ -57,7 +57,7 @@ task :pear, :version do |t, args|
                         }
                         xml.package {
                             xml.name "PHP_CodeSniffer"
-                            xml.channel "pear"
+                            xml.channel "pear.php.net"
                             xml.min "1.3.0"
                         }
                     }
