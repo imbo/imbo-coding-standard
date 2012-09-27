@@ -38,21 +38,16 @@
  * @license http://www.opensource.org/licenses/mit-license MIT License
  * @link https://github.com/imbo/imbo-codesniffer
  */
-class Imbo_Sniffs_Formatting_DisallowMultipleUseStatementsSniff implements PHP_CodeSniffer_Sniff {
+class Imbo_Sniffs_Whitespace_EmptyBodySniff implements PHP_CodeSniffer_Sniff {
     /**
-     * Counter
-     *
-     * @var int
-     */
-    static private $counter;
-
-    /**
-     * Register sniffs
+     * Which tokens this sniff should look for
      *
      * @return array
      */
     public function register() {
-        return array(T_USE);
+        return array(
+            T_OPEN_CURLY_BRACKET,
+        );
     }
 
     /**
@@ -63,25 +58,13 @@ class Imbo_Sniffs_Formatting_DisallowMultipleUseStatementsSniff implements PHP_C
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
         $tokens = $phpcsFile->getTokens();
+        $start = $tokens[$stackPtr]['scope_opener'];
+        $end = $tokens[$stackPtr]['scope_closer'];
+        $content = $phpcsFile->getTokensAsString($stackPtr + 1, ($end - $start) - 1);
+        $trimmedContent = trim($content);
 
-        // See if we have a function on the same line. Then this statement is most likely used with
-        // a closure
-        $function = $phpcsFile->findPrevious(T_CLOSURE, $stackPtr);
-
-        if ($tokens[$function]['line'] == $tokens[$stackPtr]['line']) {
-            return;
-        }
-
-        $filename = $phpcsFile->getFilename();
-
-        if (!isset(self::$counter[$filename])) {
-            self::$counter[$filename] = 1;
-        } else {
-            self::$counter[$filename]++;
-        }
-
-        if (self::$counter[$filename] > 1) {
-            $phpcsFile->addError('Multiple use statements are not allowed', $stackPtr);
+        if (empty($trimmedContent) && !empty($content)) {
+            $phpcsFile->addError('Empty body is not empty. Remove all whitespace', $stackPtr);
         }
     }
 }

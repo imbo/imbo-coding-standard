@@ -24,4 +24,5 @@
   <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
   <rule ref="Imbo.Formatting.DisallowMultipleUseStatements" />
+  <rule ref="Imbo.Whitespace.EmptyBody" />
 </ruleset>
