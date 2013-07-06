@@ -72,6 +72,13 @@ class Imbo_Sniffs_Formatting_DisallowMultipleUseStatementsSniff implements PHP_C
             return;
         }
 
+        // If the use statement is directly below a class it's related to a trait
+        $scope = key($tokens[$stackPtr]['conditions']);
+
+        if ($scope && $tokens[$scope]['code'] === T_CLASS) {
+            return;
+        }
+
         $filename = $phpcsFile->getFilename();
 
         if (!isset(self::$counter[$filename])) {
