@@ -1,0 +1,12 @@
+{
+    "name": "imbo/imbo-phpcs-standard",
+    "description": "Imbo PHP Codesniffer standard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christer Edvartsen",
+            "email": "cogo@starzinger.net"
+        }
+    ],
+    "require": {}
+}
