@@ -6,9 +6,9 @@ Add the following to the `require(-dev)` part of your `composer.json` file:
 
     "imbo/imbo-phpcs-standard": "dev-master"
 
-or any other [released version](https://packagist.org/packages/imbo/imbo-phpcs-standard). `dev-master` is always the latest stable release.
+or any other [released version](https://packagist.org/packages/imbo/imbo-phpcs-standard). `dev-master` is always the latest stable release, and `dev-develop` is the latest unstable release, **use with caution**.
 
 ## Usage
 Refer to the standard by using the `--standard` argument to the `phpcs` command:
 
-    phpcs --standard=vendor/imbo/imbo-phpcs-standard/Imbo /path/to/your/code
+    phpcs --standard=vendor/imbo/imbo-phpcs-standard/src /path/to/your/code
