@@ -1,6 +1,6 @@
 {
   "name": "imbo/imbo-phpcs-standard",
-  "description": "Imbo PHP Codesniffer standard",
+  "description": "Imbo PHP_CodeSniffer coding standard",
   "keywords": [ "image storage", "image transformation", "image metadata" ],
   "homepage": "http://imbo.io/",
   "license": "MIT",
