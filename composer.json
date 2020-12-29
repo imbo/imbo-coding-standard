@@ -1,26 +1,28 @@
 {
   "name": "imbo/imbo-coding-standard",
+  "type": "library",
   "description": "Imbo coding standard for PHP-CS-Fixer",
-  "keywords": [ "image storage", "image transformation", "image metadata" ],
+  "keywords": [ "imbo" ],
   "homepage": "https://imbo.io/",
   "license": "MIT",
   "authors": [
     {
       "name": "Christer Edvartsen",
-      "email": "cogo@starzinger.net"
+      "email": "cogo@starzinger.net",
+      "homepage": "https://github.com/christeredvartsen"
     }, {
       "name": "Contributors",
-      "homepage": "https://github.com/imbo/imbo-coding-standard/graphs/contributors"
+      "homepage": "https://github.com/imbo"
     }
   ],
+  "require": {
+    "php": ">=7.4",
+    "friendsofphp/php-cs-fixer": "^2.17"
+  },
   "autoload": {
     "psr-4": {
       "Imbo\\CodingStandard\\": "src/"
     }
-  },
-  "require": {
-    "php": ">=7.4",
-    "friendsofphp/php-cs-fixer": "^2.17"
   },
   "config": {
     "sort-packages": true
