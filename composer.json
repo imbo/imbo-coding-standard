@@ -1,8 +1,8 @@
 {
-  "name": "imbo/imbo-phpcs-standard",
-  "description": "Imbo PHP_CodeSniffer coding standard",
+  "name": "imbo/imbo-coding-standard",
+  "description": "Imbo coding standard for PHP-CS-Fixer",
   "keywords": [ "image storage", "image transformation", "image metadata" ],
-  "homepage": "http://imbo.io/",
+  "homepage": "https://imbo.io/",
   "license": "MIT",
   "authors": [
     {
@@ -10,7 +10,19 @@
       "email": "cogo@starzinger.net"
     }, {
       "name": "Contributors",
-      "homepage": "https://github.com/imbo/imbo-phpcs-standard/graphs/contributors"
+      "homepage": "https://github.com/imbo/imbo-coding-standard/graphs/contributors"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "Imbo\\CodingStandard\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "friendsofphp/php-cs-fixer": "^2.17"
+  },
+  "config": {
+    "sort-packages": true
+  }
 }
