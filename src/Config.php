@@ -2,13 +2,20 @@
 namespace Imbo\CodingStandard;
 
 use PhpCsFixer\Config as PhpCsConfig;
+use Symfony\Component\Finder\Finder;
 
 final class Config extends PhpCsConfig
 {
     public function __construct()
     {
         parent::__construct('Imbo');
+
         $this->setRiskyAllowed(true);
+        $this->setFinder((new Finder())
+            ->files()
+            ->in(realpath(__DIR__ . '/../../../..'))
+            ->name('*.php')
+            ->exclude('vendor'));
     }
 
     public function getRules()
