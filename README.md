@@ -49,6 +49,14 @@ jobs:
         run: php-cs-fixer fix --dry-run --diff --diff-format udiff
 ```
 
+## PHP-CS-Fixer and PHP-8
+
+To run PHP-CS-Fixer on PHP-8 you will need to set an environment variable that forces the php-cs-fixer command to ignore the environment requirement:
+
+    PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --diff --diff-format udiff
+
+PHP-8 support in PHP-CS-Fixer is tracked here: https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/4702.
+
 ## Custom configuration
 
 By default the `Finder` instance used with the Imbo ruleset is configured to check all `*.php` files in your project directory, excluding the `vendor` directory. If you need to override this behaviour you will have to replace the `Finder` instance from your `.php_cs.dist` file:

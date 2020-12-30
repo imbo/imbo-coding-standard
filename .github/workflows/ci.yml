@@ -17,4 +17,4 @@ jobs:
         run: composer install --prefer-dist
 
       - name: Check coding standard
-        run: php-cs-fixer fix --dry-run --diff --diff-format udiff
+        run: PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --diff --diff-format udiff
