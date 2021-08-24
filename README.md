@@ -7,7 +7,7 @@ This is the PHP coding standard for the Imbo project and all related tools. The 
 
 First, add this package as a development dependency:
 
-    composer require --dev imbo/imbo-coding-standard
+    composer require --dev imbo/imbo-coding-standard ^2.0
 
 then, create a PHP-CS-Fixer configuration file named `.php-cs-fixer.php` local to your repository that includes the following:
 
