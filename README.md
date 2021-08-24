@@ -9,18 +9,31 @@ First, add this package as a development dependency:
 
     composer require --dev imbo/imbo-coding-standard
 
-then, create a PHP-CS-Fixer configuration file named `.php_cs.dist` local to your repository that includes the following:
+then, create a PHP-CS-Fixer configuration file named `.php-cs-fixer.php` local to your repository that includes the following:
 
 ```php
-<?php
-return new Imbo\CodingStandard\Config();
+<?php declare(strict_types=1);
+require 'vendor/autoload.php';
+
+$finder = (new Symfony\Component\Finder\Finder())
+    ->files()
+    ->name('*.php')
+    ->in(__DIR__)
+    ->exclude('vendor');
+
+return (new Imbo\CodingStandard\Config())
+    ->setFinder($finder);
 ```
 
-Now you can run the following command to check the coding standard in your project:
+Adjust the paths if necessary. Now you can run the following command to check the coding standard in your project:
 
-    php-cs-fixer fix --dry-run --diff --diff-format udiff
+    php-cs-fixer fix --dry-run --diff
 
-Refer to the [documentation](https://github.com/FriendsOfPHP/PHP-CS-Fixer) on how to install php-cs-fixer locally.
+You can install the `php-cs-fixer` tool globally with Composer if you so wish:
+
+    composer global require friendsofphp/php-cs-fixer
+
+Refer to the [documentation](https://github.com/FriendsOfPHP/PHP-CS-Fixer) for other installation alternatives.
 
 ## Add step in the GitHub workflow
 
@@ -46,7 +59,7 @@ jobs:
         run: composer install --prefer-dist
 
       - name: Check coding standard
-        run: php-cs-fixer fix --dry-run --diff --diff-format udiff
+        run: php-cs-fixer fix --dry-run --diff
 ```
 
 ## PHP-CS-Fixer and PHP-8
@@ -56,22 +69,3 @@ To run PHP-CS-Fixer on PHP-8 you will need to set an environment variable that f
     PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --diff --diff-format udiff
 
 PHP-8 support in PHP-CS-Fixer is tracked here: https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/4702.
-
-## Custom configuration
-
-By default the `Finder` instance used with the Imbo ruleset is configured to check all `*.php` files in your project directory, excluding the `vendor` directory. If you need to override this behaviour you will have to replace the `Finder` instance from your `.php_cs.dist` file:
-
-```php
-<?php declare(strict_types=1);
-// Create your custom Finder
-$finder = (new Symfony\Component\Finder\Finder())
-    ->files()
-    ->in('src', 'tests')
-    ->name('*.php')
-    ->exclude('vendor');
-
-// Return the Imbo ruleset with the updated Finder instance
-return (new Imbo\CodingStandard\Config())
-    ->setFinder($finder);
-```
-
