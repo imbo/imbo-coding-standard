@@ -33,7 +33,12 @@ final class Config extends PhpCsConfig
                 'import_functions' => true,
             ],
             'declare_strict_types' => true,
-            'trailing_comma_in_multiline' => true,
+            'trailing_comma_in_multiline' => [
+                'elements' => [
+                    'arrays',
+                    'arguments',
+                ],
+            ],
             'array_indentation' => true,
             'array_syntax' => [
                 'syntax' => 'short',

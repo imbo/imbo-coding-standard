@@ -26,6 +26,10 @@
       "Imbo\\CodingStandard\\": "src/"
     }
   },
+  "scripts": {
+    "cs": "php-cs-fixer fix --dry-run --diff",
+    "ci": "@cs"
+  },
   "config": {
     "sort-packages": true
   }

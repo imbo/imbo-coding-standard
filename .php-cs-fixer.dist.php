@@ -3,8 +3,8 @@ require 'vendor/autoload.php';
 
 $finder = (new Symfony\Component\Finder\Finder())
     ->files()
-    ->in('src')
     ->name('*.php')
+    ->in(__DIR__)
     ->exclude('vendor');
 
 return (new Imbo\CodingStandard\Config())
