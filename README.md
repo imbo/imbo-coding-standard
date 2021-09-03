@@ -1,5 +1,7 @@
 # Imbo Coding Standard
 
+[![CI workflow](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml)
+
 This is the PHP coding standard for the Imbo project and all related tools. The ruleset is enforced using the [PHP Coding Standards Fixer
 ](https://github.com/FriendsOfPHP/PHP-CS-Fixer) tool.
 
