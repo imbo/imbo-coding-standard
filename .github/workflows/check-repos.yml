@@ -30,6 +30,7 @@ jobs:
           - imbo-pdo-adapters
           - imbo-postgresql-adapters
           - imbo-s3-adapters
+          - imboclient-php
 
     steps:
       - uses: actions/checkout@v2
