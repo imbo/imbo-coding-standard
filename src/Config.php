@@ -52,6 +52,7 @@ final class Config extends PhpCsConfig
             ],
             'blank_line_after_opening_tag' => false,
             'single_blank_line_before_namespace' => false,
+            'no_blank_lines_before_namespace' => true,
         ];
     }
 }
