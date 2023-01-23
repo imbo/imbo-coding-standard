@@ -6,17 +6,17 @@ on:
 
 jobs:
   tag:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     name: Get tag
     steps:
       - id: tag
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
   check-repos-and-create-pr:
     needs: tag
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     name: Check repo
     strategy:
       fail-fast: false
@@ -33,7 +33,7 @@ jobs:
           - imboclient-php
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: imbo/${{ matrix.repo }}
           ref: refs/heads/main
@@ -41,7 +41,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           tools: php-cs-fixer
 
       - run: |
@@ -51,7 +51,7 @@ jobs:
       - id: check
         run: |
           if ! php-cs-fixer fix --dry-run --quiet; then
-            echo ::set-output name=result::failure
+            echo "result=failure" >> $GITHUB_OUTPUT
           fi
         continue-on-error: true
 
@@ -60,7 +60,7 @@ jobs:
           php-cs-fixer fix
 
       - if: ${{ steps.check.outputs.result == 'failure' }}
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.PUBLIC_REPO_ACCESS_PAT }}
           branch: coding-standard-violations/${{ needs.tag.outputs.tag }}
