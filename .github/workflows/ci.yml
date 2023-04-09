@@ -2,10 +2,9 @@ name: CI workflow
 on: push
 jobs:
   php-cs-fixer:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        operating-system: ['ubuntu-20.04']
         php-versions: ['8.1', '8.2']
     name: Check coding standard
     steps:
