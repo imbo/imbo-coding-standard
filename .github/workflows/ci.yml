@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        php-versions: ['8.1', '8.2']
+        php: ['8.1', '8.2']
     name: Check coding standard
     steps:
       - name: Checkout code
@@ -14,11 +14,11 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php }}
           tools: php-cs-fixer
 
       - name: Install dependencies
-        run: composer install --prefer-dist
+        run: composer install
 
       - name: Check coding standard
-        run: PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --diff
+        run: php-cs-fixer fix --dry-run --diff

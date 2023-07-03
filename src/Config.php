@@ -52,7 +52,10 @@ final class Config extends PhpCsConfig
             ],
             'blank_line_after_opening_tag' => false,
             'single_blank_line_before_namespace' => false,
-            'no_blank_lines_before_namespace' => true,
+            'blank_lines_before_namespace' => [
+                'min_line_breaks' => 1,
+                'max_line_breaks' => 1,
+            ],
         ];
     }
 }
