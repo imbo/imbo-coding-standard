@@ -22,6 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         repo:
+          - behat-api-extension
           - imbo-adapters-sdk
           - imbo-b2-adapters
           - imbo-filesystem-adapters
