@@ -29,13 +29,7 @@ return (new Imbo\CodingStandard\Config())
 
 Adjust the paths if necessary. Now you can run the following command to check the coding standard in your project:
 
-    php-cs-fixer fix --dry-run --diff
-
-You can install the `php-cs-fixer` tool globally with Composer if you so wish:
-
-    composer global require friendsofphp/php-cs-fixer
-
-Refer to the [documentation](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) for other installation alternatives.
+    vendor/bin/php-cs-fixer fix --dry-run --diff
 
 ## Add step in the GitHub workflow
 
