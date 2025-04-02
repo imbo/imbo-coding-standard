@@ -50,13 +50,13 @@ jobs:
 
       - id: check
         run: |
-          if ! ./vendor/bin/php-cs-fixer fix --dry-run --quiet; then
+          if ! vendor/bin/php-cs-fixer fix --dry-run --quiet; then
             echo "result=failure" >> $GITHUB_OUTPUT
           fi
         continue-on-error: true
 
       - if: ${{ steps.check.outputs.result == 'failure' }}
-        run: ./vendor/bin/php-cs-fixer fix
+        run: vendor/bin/php-cs-fixer fix
 
       - if: ${{ steps.check.outputs.result == 'failure' }}
         uses: peter-evans/create-pull-request@v7

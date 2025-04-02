@@ -20,4 +20,4 @@ jobs:
         run: composer install
 
       - name: Check coding standard
-        run: php-cs-fixer fix --dry-run --diff
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff
