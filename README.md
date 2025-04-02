@@ -3,15 +3,15 @@
 [![CI workflow](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml)
 
 This is the PHP coding standard for the Imbo project and all related tools. The ruleset is enforced using the [PHP Coding Standards Fixer
-](https://github.com/FriendsOfPHP/PHP-CS-Fixer) tool.
+](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) tool.
 
 ## How to setup
 
-First, add this package as a development dependency:
+First, add this package and [php-cs-fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) as development dependencies:
 
-    composer require --dev imbo/imbo-coding-standard ^2.0
+    composer require --dev imbo/imbo-coding-standard ^2.0 friendsofphp/php-cs-fixer
 
-then, create a PHP-CS-Fixer configuration file named `.php-cs-fixer.php` local to your repository that includes the following:
+then, create a configuration file named `.php-cs-fixer.php` local to your repository that includes the following:
 
 ```php
 <?php declare(strict_types=1);
@@ -35,7 +35,7 @@ You can install the `php-cs-fixer` tool globally with Composer if you so wish:
 
     composer global require friendsofphp/php-cs-fixer
 
-Refer to the [documentation](https://github.com/FriendsOfPHP/PHP-CS-Fixer) for other installation alternatives.
+Refer to the [documentation](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) for other installation alternatives.
 
 ## Add step in the GitHub workflow
 
@@ -46,20 +46,18 @@ name: CI workflow
 on: push
 jobs:
   php-cs-fixer:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     name: Check coding standard
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        with:
-          tools: php-cs-fixer
 
       - name: Install dependencies
-        run: composer install --prefer-dist
+        run: composer install
 
       - name: Check coding standard
-        run: php-cs-fixer fix --dry-run --diff
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
 ```

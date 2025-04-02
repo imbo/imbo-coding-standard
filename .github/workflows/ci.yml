@@ -2,20 +2,19 @@ name: CI workflow
 on: push
 jobs:
   php-cs-fixer:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        php: ['8.1', '8.2']
+        php: ["8.3"]
     name: Check coding standard
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: php-cs-fixer
 
       - name: Install dependencies
         run: composer install
