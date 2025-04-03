@@ -40,7 +40,7 @@ name: CI workflow
 on: push
 jobs:
   php-cs-fixer:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     name: Check coding standard
     steps:
       - name: Checkout code

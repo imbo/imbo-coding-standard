@@ -6,7 +6,7 @@ on:
 
 jobs:
   tag:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     name: Get tag
@@ -16,7 +16,7 @@ jobs:
 
   check-repos-and-create-pr:
     needs: tag
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     name: Check repo
     strategy:
       fail-fast: false
