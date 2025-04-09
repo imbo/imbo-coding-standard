@@ -17,11 +17,9 @@ then, create a configuration file named `.php-cs-fixer.php` local to your reposi
 <?php declare(strict_types=1);
 require 'vendor/autoload.php';
 
-$finder = (new Symfony\Component\Finder\Finder())
-    ->files()
-    ->name('*.php')
+$finder = (new PhpCsFixer\Finder())
     ->in(__DIR__)
-    ->exclude('vendor');
+    ->append([__FILE__]);
 
 return (new Imbo\CodingStandard\Config())
     ->setFinder($finder);
@@ -29,7 +27,7 @@ return (new Imbo\CodingStandard\Config())
 
 Adjust the paths if necessary. Now you can run the following command to check the coding standard in your project:
 
-    vendor/bin/php-cs-fixer fix --dry-run --diff
+    vendor/bin/php-cs-fixer check --diff
 
 ## Add step in the GitHub workflow
 
@@ -53,5 +51,18 @@ jobs:
         run: composer install
 
       - name: Check coding standard
-        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
+        run: vendor/bin/php-cs-fixer check --diff
+```
+
+## Add scripts for Composer
+
+All Imbo-related projects use [Composer](https://getcomposer.org), and checking / fixing coding standard violations should be done using Composer scripts in `composer.json`:
+
+```json
+{
+  "scripts": {
+    "cs": "vendor/bin/php-cs-fixer check --diff",
+    "cs:fix": "vendor/bin/php-cs-fixer fix --diff"
+  }
+}
 ```

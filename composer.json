@@ -10,19 +10,19 @@
   "authors": [
     {
       "name": "Christer Edvartsen",
-      "email": "cogo@starzinger.net",
       "homepage": "https://github.com/christeredvartsen"
     },
     {
       "name": "Contributors",
-      "homepage": "https://github.com/imbo"
+      "homepage": "https://github.com/imbo/imbo-coding-standard/graphs/contributors"
     }
   ],
   "require": {
-    "php": ">=8.3"
+    "php": ">=8.3",
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.24"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "friendsofphp/php-cs-fixer": "^3.75"
   },
   "autoload": {
     "psr-4": {
@@ -30,7 +30,8 @@
     }
   },
   "scripts": {
-    "cs": "vendor/bin/php-cs-fixer fix --dry-run --diff -vvv",
+    "cs": "vendor/bin/php-cs-fixer check --diff -vvv",
+    "cs:fix": "vendor/bin/php-cs-fixer fix --diff",
     "ci": "@cs"
   },
   "config": {
