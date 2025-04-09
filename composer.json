@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "cs": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "cs": "vendor/bin/php-cs-fixer fix --dry-run --diff -vvv",
     "ci": "@cs"
   },
   "config": {

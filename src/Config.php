@@ -43,7 +43,7 @@ final class Config extends PhpCsConfig
             'array_syntax' => [
                 'syntax' => 'short',
             ],
-            'compact_nullable_typehint' => true,
+            'compact_nullable_type_declaration' => true,
             'no_spaces_around_offset' => [
                 'positions' => [
                     'inside',
@@ -51,7 +51,6 @@ final class Config extends PhpCsConfig
                 ],
             ],
             'blank_line_after_opening_tag' => false,
-            'single_blank_line_before_namespace' => false,
             'blank_lines_before_namespace' => [
                 'min_line_breaks' => 1,
                 'max_line_breaks' => 1,
