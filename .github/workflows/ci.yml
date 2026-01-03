@@ -10,7 +10,7 @@ concurrency:
 permissions:
   contents: read
 jobs:
-  php-cs-fixer:
+  ci:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -27,3 +27,13 @@ jobs:
           php-version: ${{ matrix.php }}
       - run: composer install
       - run: vendor/bin/php-cs-fixer check --diff
+  branch-protection:
+    needs:
+      - ci
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    name: Branch protection
+    steps:
+      - if: ${{ needs.ci.result != 'success' }}
+        run: exit 1
+      - run: echo "All checks passed."
