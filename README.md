@@ -1,7 +1,5 @@
 # Imbo Coding Standard
 
-[![CI workflow](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/imbo/imbo-coding-standard/actions/workflows/ci.yml)
-
 This is the PHP coding standard for the Imbo project and all related tools. The ruleset is enforced using the [PHP Coding Standards Fixer
 ](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) tool.
 
@@ -34,24 +32,17 @@ Adjust the paths if necessary. Now you can run the following command to check th
 All Imbo-related projects use GitHub workflows, and checking the coding standard should be a part of that workflow:
 
 ```yaml
-name: CI workflow
+name: CI
 on: push
 jobs:
   php-cs-fixer:
     runs-on: ubuntu-latest
     name: Check coding standard
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-
-      - name: Install dependencies
-        run: composer install
-
-      - name: Check coding standard
-        run: vendor/bin/php-cs-fixer check --diff
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+      - run: composer install
+      - run: vendor/bin/php-cs-fixer check --diff
 ```
 
 ## Add scripts for Composer
@@ -66,3 +57,7 @@ All Imbo-related projects use [Composer](https://getcomposer.org), and checking 
   }
 }
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
