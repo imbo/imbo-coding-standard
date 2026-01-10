@@ -37,6 +37,7 @@ final class Config extends PhpCsConfig
                 ],
 
                 // Own / custom rules
+                'phpdoc_to_comment' => false,
                 'declare_strict_types' => true,
                 'heredoc_indentation' => [
                     'indentation' => 'same_as_start',
