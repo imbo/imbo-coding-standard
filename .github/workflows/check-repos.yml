@@ -6,24 +6,10 @@ on:
 permissions:
   contents: read
 jobs:
-  get-app-token:
-    runs-on: ubuntu-latest
-    outputs:
-      token: ${{ steps.app-token.outputs.token }}
-    name: Get Imbo Automation token
-    steps:
-      - id: app-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.IMBO_AUTOMATION_APP_ID }}
-          private-key: ${{ secrets.IMBO_AUTOMATION_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
   check-repos-and-create-pr:
     permissions:
       contents: write
       pull-requests: write
-    needs:
-      - get-app-token
     runs-on: ubuntu-latest
     name: Check repo for coding standard violations
     strategy:
@@ -37,11 +23,17 @@ jobs:
     env:
       TAG: ${{ github.ref_name }}
     steps:
+      - id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.IMBO_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.IMBO_AUTOMATION_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - uses: actions/checkout@v6
         with:
           repository: imbo/${{ matrix.repo }}
           ref: refs/heads/main
-          token: ${{ needs.get-app-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
       - uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
@@ -58,7 +50,7 @@ jobs:
       - if: ${{ steps.check.outputs.result == 'failure' }}
         uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ needs.get-app-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
           branch: coding-standard-violations/${{ env.TAG }}
           delete-branch: true
           commit-message: |
