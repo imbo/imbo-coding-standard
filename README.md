@@ -13,7 +13,14 @@ then, create a configuration file named `.php-cs-fixer.dist.php` local to your r
 
 ```php
 <?php declare(strict_types=1);
-return require 'vendor/imbo/imbo-coding-standard/.php-cs-fixer.dist.php';
+require 'vendor/autoload.php';
+
+$finder = new PhpCsFixer\Finder();
+$config = new Imbo\CodingStandard\Config();
+
+return $config
+    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
+    ->setFinder($finder->in(__DIR__)->append([__FILE__]));
 ```
 
 Now you can run the following command to check the coding standard in your project:
