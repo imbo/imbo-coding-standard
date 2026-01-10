@@ -1,29 +1,22 @@
 # Imbo Coding Standard
 
-This is the PHP coding standard for the Imbo project and all related tools. The ruleset is enforced using the [PHP Coding Standards Fixer
+This is the PHP coding standard for the Imbo project and other related tools. The ruleset is enforced using the [PHP Coding Standards Fixer
 ](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) tool.
 
 ## How to setup
 
 First, add this package and [php-cs-fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) as development dependencies:
 
-    composer require --dev imbo/imbo-coding-standard ^2.0 friendsofphp/php-cs-fixer
+    composer require --dev imbo/imbo-coding-standard ^3.0 friendsofphp/php-cs-fixer
 
-then, create a configuration file named `.php-cs-fixer.php` local to your repository that includes the following:
+then, create a configuration file named `.php-cs-fixer.dist.php` local to your repository that includes the following:
 
 ```php
 <?php declare(strict_types=1);
-require 'vendor/autoload.php';
-
-$finder = (new PhpCsFixer\Finder())
-    ->in(__DIR__)
-    ->append([__FILE__]);
-
-return (new Imbo\CodingStandard\Config())
-    ->setFinder($finder);
+return require 'vendor/imbo/imbo-coding-standard/.php-cs-fixer.dist.php';
 ```
 
-Adjust the paths if necessary. Now you can run the following command to check the coding standard in your project:
+Now you can run the following command to check the coding standard in your project:
 
     vendor/bin/php-cs-fixer check --diff
 

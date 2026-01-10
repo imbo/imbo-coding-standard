@@ -30,9 +30,9 @@
     }
   },
   "scripts": {
+    "ci": "@cs",
     "cs": "vendor/bin/php-cs-fixer check --diff",
-    "cs:fix": "vendor/bin/php-cs-fixer fix --diff",
-    "ci": "@cs"
+    "cs:fix": "vendor/bin/php-cs-fixer fix --diff"
   },
   "config": {
     "sort-packages": true
