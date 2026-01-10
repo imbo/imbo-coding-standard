@@ -18,6 +18,7 @@ jobs:
         repo:
           - behat-api-extension
           - imbo-b2-adapters
+          - imbo-metadata-cache
           - imbo-s3-adapters
           - imboclient-php
     env:
