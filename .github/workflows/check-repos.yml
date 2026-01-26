@@ -17,6 +17,7 @@ jobs:
       matrix:
         repo:
           - behat-api-extension
+          - imbo
           - imbo-b2-adapters
           - imbo-metadata-cache
           - imbo-s3-adapters
