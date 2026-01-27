@@ -5,9 +5,9 @@ This is the PHP coding standard for the Imbo project and other related tools. Th
 
 ## How to setup
 
-First, add this package and [php-cs-fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) as development dependencies:
+Add this package as a development dependency to your project using Composer:
 
-    composer require --dev imbo/imbo-coding-standard ^3.0 friendsofphp/php-cs-fixer
+    composer require --dev imbo/imbo-coding-standard ^3.0
 
 then, create a configuration file named `.php-cs-fixer.dist.php` local to your repository that includes the following:
 
@@ -47,7 +47,7 @@ jobs:
 
 ## Add scripts for Composer
 
-All Imbo-related projects use [Composer](https://getcomposer.org), and checking / fixing coding standard violations should be done using Composer scripts in `composer.json`:
+All Imbo-related projects use [Composer](https://getcomposer.org), and checking / fixing coding standard violations can be done using Composer scripts in `composer.json`:
 
 ```json
 {
