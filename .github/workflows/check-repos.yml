@@ -22,6 +22,7 @@ jobs:
           - imbo-metadata-cache
           - imbo-s3-adapters
           - imboclient-php
+          - releaser
     env:
       TAG: ${{ github.ref_name }}
     steps:
