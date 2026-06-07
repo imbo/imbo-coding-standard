@@ -6,7 +6,16 @@ on:
 permissions:
   contents: read
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      repos: ${{ steps.repos.outputs.repos }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: repos
+        run: echo "repos=$(cat .github/repos.json | jq -c)" >> $GITHUB_OUTPUT
   check-repos-and-create-pr:
+    needs: setup
     permissions:
       contents: write
       pull-requests: write
@@ -15,14 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        repo:
-          - behat-api-extension
-          - imbo
-          - imbo-b2-adapters
-          - imbo-metadata-cache
-          - imbo-s3-adapters
-          - imboclient-php
-          - releaser
+        repo: ${{ fromJSON(needs.setup.outputs.repos) }}
     env:
       TAG: ${{ github.ref_name }}
     steps:
