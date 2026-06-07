@@ -42,6 +42,10 @@ final class Config extends PhpCsConfig
                 'heredoc_indentation' => [
                     'indentation' => 'same_as_start',
                 ],
+                'numeric_literal_separator' => [
+                    'override_existing' => true,
+                    'strategy' => 'use_separator',
+                ],
                 DeclareAfterOpeningTagFixer::name() => true,
             ]);
     }
