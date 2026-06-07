@@ -49,10 +49,13 @@ jobs:
         run: |
           vendor/bin/php-cs-fixer fix --quiet || true
           git diff -- . ':!composer.json' ':!composer.lock' > /tmp/diff.patch
+          git diff --stat -- . ':!composer.json' ':!composer.lock' | tail -1 > /tmp/diff.stat
       - uses: actions/upload-artifact@v4
         with:
           name: diff-${{ matrix.repo }}
-          path: /tmp/diff.patch
+          path: |
+            /tmp/diff.patch
+            /tmp/diff.stat
           retention-days: 1
   comment:
     needs: [setup, preview-diff]
@@ -73,14 +76,18 @@ jobs:
           {
             echo "<!-- preview-diff -->"
             echo "## Coding standard diff preview"
+            echo "Below is a preview of the changes that would be applied to each repository when this change is included in a new release of the coding standard. Changes to \`composer.json\` and \`composer.lock\` are excluded from the preview since they are not relevant to the coding standard changes."
+            echo ""
+            echo "The list of repositories is based on the [.github/repos.json](https://github.com/imbo/imbo-coding-standard/blob/${{ github.head_ref }}/.github/repos.json) file in this repository."
             echo ""
 
             REPOS='${{ needs.setup.outputs.repos }}'
             for REPO in $(echo "$REPOS" | jq -r '.[]'); do
               DIFF_FILE="diffs/diff-${REPO}/diff.patch"
               if [ -s "$DIFF_FILE" ]; then
+                STAT=$(cat "diffs/diff-${REPO}/diff.stat" 2>/dev/null || echo "")
                 echo "<details>"
-                echo "<summary>:warning: <a href=\"https://github.com/imbo/${REPO}\">imbo/${REPO}</a></summary>"
+                echo "<summary><a href=\"https://github.com/imbo/${REPO}\">imbo/${REPO}</a> :warning: <code>${STAT}</code></summary>"
                 echo ""
                 echo '```diff'
                 head -500 "$DIFF_FILE"
@@ -93,7 +100,12 @@ jobs:
                 echo ""
                 echo "</details>"
               else
-                echo ":white_check_mark: [**imbo/${REPO}**](https://github.com/imbo/${REPO}) — No changes."
+                echo "<details>"
+                echo "<summary><a href=\"https://github.com/imbo/${REPO}\">imbo/${REPO}</a> :white_check_mark:</summary>"
+                echo ""
+                echo "No changes."
+                echo ""
+                echo "</details>"
               fi
               echo ""
             done

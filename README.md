@@ -58,6 +58,15 @@ All Imbo-related projects use [Composer](https://getcomposer.org), and checking 
 }
 ```
 
+## Managed repositories
+
+The [.github/repos.json](.github/repos.json) file contains a list of repositories that use this coding standard. This list is used by the GitHub workflows to:
+
+- Preview diffs on pull requests to show what changes a coding standard update would cause.
+- Automatically create pull requests with fixes when a new version is tagged.
+
+To add or remove a repository, edit the JSON file.
+
 ## License
 
 MIT, see [LICENSE](LICENSE).
