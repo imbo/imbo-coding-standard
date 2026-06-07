@@ -53,10 +53,11 @@ jobs:
       - if: ${{ steps.check.outputs.result == 'failure' }}
         run: vendor/bin/php-cs-fixer fix
       - if: ${{ steps.check.outputs.result == 'failure' }}
+        id: create-pr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.app-token.outputs.token }}
-          branch: coding-standard-violations/${{ env.TAG }}
+          branch: coding-standard-violations
           delete-branch: true
           commit-message: |
             fix: coding standard violations (imbo/imbo-coding-standard@${{ env.TAG }})
@@ -76,3 +77,12 @@ jobs:
             stay compliant with the coding standards.
           author: Imbo Automation <imbo-automation@users.noreply.github.com>
           committer: Imbo Automation <imbo-automation@users.noreply.github.com>
+      - name: Summary
+        run: |
+          if [ "${{ steps.check.outputs.result }}" != "failure" ]; then
+            echo ":white_check_mark: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — No violations." >> $GITHUB_STEP_SUMMARY
+          elif [ -n "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
+            echo ":hammer_and_wrench: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — [PR created](${{ steps.create-pr.outputs.pull-request-url }})" >> $GITHUB_STEP_SUMMARY
+          else
+            echo ":warning: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — Violations found but PR already exists." >> $GITHUB_STEP_SUMMARY
+          fi
