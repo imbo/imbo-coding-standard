@@ -80,9 +80,9 @@ jobs:
       - name: Summary
         run: |
           if [ "${{ steps.check.outputs.result }}" != "failure" ]; then
-            echo ":white_check_mark: **imbo/${{ matrix.repo }}** — No violations." >> $GITHUB_STEP_SUMMARY
+            echo ":white_check_mark: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — No violations." >> $GITHUB_STEP_SUMMARY
           elif [ -n "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
-            echo ":hammer_and_wrench: **imbo/${{ matrix.repo }}** — PR created: ${{ steps.create-pr.outputs.pull-request-url }}" >> $GITHUB_STEP_SUMMARY
+            echo ":hammer_and_wrench: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — [PR created](${{ steps.create-pr.outputs.pull-request-url }})" >> $GITHUB_STEP_SUMMARY
           else
-            echo ":warning: **imbo/${{ matrix.repo }}** — Violations found but PR already exists." >> $GITHUB_STEP_SUMMARY
+            echo ":warning: [**imbo/${{ matrix.repo }}**](https://github.com/imbo/${{ matrix.repo }}) — Violations found but PR already exists." >> $GITHUB_STEP_SUMMARY
           fi

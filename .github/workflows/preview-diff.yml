@@ -80,7 +80,7 @@ jobs:
               DIFF_FILE="diffs/diff-${REPO}/diff.patch"
               if [ -s "$DIFF_FILE" ]; then
                 echo "<details>"
-                echo "<summary>:warning: imbo/${REPO}</summary>"
+                echo "<summary>:warning: <a href=\"https://github.com/imbo/${REPO}\">imbo/${REPO}</a></summary>"
                 echo ""
                 echo '```diff'
                 head -500 "$DIFF_FILE"
@@ -93,7 +93,7 @@ jobs:
                 echo ""
                 echo "</details>"
               else
-                echo ":white_check_mark: **imbo/${REPO}** — No changes."
+                echo ":white_check_mark: [**imbo/${REPO}**](https://github.com/imbo/${REPO}) — No changes."
               fi
               echo ""
             done
